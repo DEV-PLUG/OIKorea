@@ -3,29 +3,29 @@
 
 int main() {
 
-	int K, h; // K¿Í Ã³À½ ±¸¸ÛÀ» ¶Õ´Â À§Ä¡ h Á¤ÀÇ.
+	int K, h; // Kì™€ ì²˜ìŒ êµ¬ë©ì„ ëš«ëŠ” ìœ„ì¹˜ h ì •ì˜.
 
-	int location[512][512] = { 0 }; // ±¸¸Û ¶Õ¸° À§Ä¡¸¦ ±â·ÏÇÒ 2Â÷¿ø ¹è¿­.
-	int final_hole[256][256] = { 0 }; // ÃÖÁ¾ÀûÀ¸·Î Ãâ·ÂÇÒ ±¸¸Û À§Ä¡ 2Â÷¿ø ¹è¿­.
-	char fold[17] = { 0 }; // Á¢´Â ¼ø¼­¸¦ ±â·ÏÇÒ ¹è¿­.
+	int location[512][512] = { 0 }; // êµ¬ë© ëš«ë¦° ìœ„ì¹˜ë¥¼ ê¸°ë¡í•  2ì°¨ì› ë°°ì—´.
+	int final_hole[256][256] = { 0 }; // ìµœì¢…ì ìœ¼ë¡œ ì¶œë ¥í•  êµ¬ë© ìœ„ì¹˜ 2ì°¨ì› ë°°ì—´.
+	char fold[17] = { 0 }; // ì ‘ëŠ” ìˆœì„œë¥¼ ê¸°ë¡í•  ë°°ì—´.
 
-	scanf("%d", &K); // K ÀÔ·Â¹ÞÀ½.
+	scanf("%d", &K); // K ìž…ë ¥ë°›ìŒ.
 
-	// Á¦°öÀ¸·Î Á¾ÀÌ ±æÀÌ ±¸ÇÏ±â
+	// ì œê³±ìœ¼ë¡œ ì¢…ì´ ê¸¸ì´ êµ¬í•˜ê¸°
 	int paper_length = 1;
 	for (int x = 0; x < K; x++) {
 		paper_length = paper_length * 2;
 	}
 
-	int x[2] = { 0, (paper_length * 2 - 1) }, y[2] = { 0, (paper_length * 2 - 1) }; // ÇöÀç Á¢Èù ºÎºÐÀÌ Â÷ÁöÇÏ´Â À§Ä¡¸¦ ³ªÅ¸³¾ x, y ÁÂÇ¥ Á¤ÀÇ.
+	int x[2] = { 0, (paper_length * 2 - 1) }, y[2] = { 0, (paper_length * 2 - 1) }; // í˜„ìž¬ ì ‘ížŒ ë¶€ë¶„ì´ ì°¨ì§€í•˜ëŠ” ìœ„ì¹˜ë¥¼ ë‚˜íƒ€ë‚¼ x, y ì¢Œí‘œ ì •ì˜.
 
 	for (int i = 0; i < (K * 2); i++) {
-		scanf("%s", &fold[i]); // Á¢´Â ¹æ¹ý ÀÔ·Â¹ÞÀ½.
+		scanf("%s", &fold[i]); // ì ‘ëŠ” ë°©ë²• ìž…ë ¥ë°›ìŒ.
 	}
 
-	scanf("%d", &h); // h ÀÔ·Â¹ÞÀ½.
+	scanf("%d", &h); // h ìž…ë ¥ë°›ìŒ.
 
-	// Á¢Èù À§Ä¡ ±â·Ï
+	// ì ‘ížŒ ìœ„ì¹˜ ê¸°ë¡
 	for (int j = 0; j < (K * 2); j++) {
 		if (fold[j] == 'U') {
 			y[1] = y[1] - ((y[1] - y[0] + 1) / 2);
@@ -41,7 +41,7 @@ int main() {
 		}
 	}
 
-	// Ã³À½ ±¸¸Û ¶Õ´Â À§Ä¡ ±â·Ï
+	// ì²˜ìŒ êµ¬ë© ëš«ëŠ” ìœ„ì¹˜ ê¸°ë¡
 	if (h == 0) {
 		location[y[0]][x[0]] = 1;
 	}
@@ -55,11 +55,11 @@ int main() {
 		location[y[1]][x[1]] = 1;
 	}
 
-	// Á¾ÀÌ ÆîÄ¡±â.
+	// ì¢…ì´ íŽ¼ì¹˜ê¸°.
 	for (int s = 0; s < (K * 2); s++) {
 		if (fold[(K * 2) - 1 - s] == 'U') {
 
-			// ÄÚµå ÇØ¼³ 2 - 1 Âü°í.
+			// ì½”ë“œ í•´ì„¤ 2 - 1 ì°¸ê³ .
 			for (int o = x[0]; o < x[1] + 1; o++) {
 				for (int a = y[0]; a < y[1] + 1; a++) {
 					location[y[1] + (y[1] - y[0] + 1) - (a - y[0])][o] = location[a][o];
@@ -70,7 +70,7 @@ int main() {
 		}
 		if (fold[(K * 2) - 1 - s] == 'D') {
 
-			// ÄÚµå ÇØ¼³ 2 - 2 Âü°í.
+			// ì½”ë“œ í•´ì„¤ 2 - 2 ì°¸ê³ .
 			for (int o = x[0]; o < x[1] + 1; o++) {
 				for (int a = y[0]; a < y[1] + 1; a++) {
 					location[y[0] - (a - y[0] + 1)][o] = location[a][o];
@@ -81,7 +81,7 @@ int main() {
 		}
 		if (fold[(K * 2) - 1 - s] == 'L') {
 
-			// ÄÚµå ÇØ¼³ 2 - 3 Âü°í.
+			// ì½”ë“œ í•´ì„¤ 2 - 3 ì°¸ê³ .
 			for (int o = y[0]; o < y[1] + 1; o++) {
 				for (int a = x[0]; a < x[1] + 1; a++) {
 					location[o][(x[1] + (x[1] - x[0] + 1)) - (a - x[0])] = location[o][a];
@@ -92,7 +92,7 @@ int main() {
 		}
 		if (fold[(K * 2) - 1 - s] == 'R') {
 
-			// ÄÚµå ÇØ¼³ 2 - 4 Âü°í.
+			// ì½”ë“œ í•´ì„¤ 2 - 4 ì°¸ê³ .
 			for (int o = y[0]; o < y[1] + 1; o++) {
 				for (int a = x[0]; a < x[1] + 1; a++) {
 					location[o][(x[0] - (a - x[0] + 1))] = location[o][a];
@@ -102,28 +102,9 @@ int main() {
 			x[0] = x[0] - (x[1] - x[0] + 1);
 		}
 
-		// ±¸¸Û À§Ä¡¿Í X, Y º¯¼ö Ãâ·Â(µð¹ö±× ÄÚµå).
-		//for (int q = 0; q < (paper_length * 2); q++) {
-		//	for (int p = 0; p < (paper_length * 2); p++) {
-		//		printf("%d ", location[q][p]);
-		//	}
-		//	printf("\n");
-		//}
-		//printf("X: %d %d, Y: %d %d, xchange: %d, ychange: %d\n\n", x[0], x[1], y[0], y[1], xChange, yChange);
-		//printf("\n");
-
 	}
 
-	// ÃÖÁ¾ ±¸¸Û À§Ä¡ Ãâ·Â(µð¹ö±× ÄÚµå).
-	//for (int q = 0; q < (paper_length * 2); q++) {
-	//	for (int p = 0; p < (paper_length * 2); p++) {
-	//		printf("%d ", location[q][p]);
-	//	}
-	// 	printf("\n");
-	//}
-
-
-	// ±¸¸Û À§Ä¡ Ãâ·Â
+	// êµ¬ë© ìœ„ì¹˜ ì¶œë ¥
 	for (int q = 0; q < (paper_length * 2); q++) {
 		for (int p = 0; p < (paper_length * 2); p++) {
 			if (q == 0 || q % 2 == 0) {
